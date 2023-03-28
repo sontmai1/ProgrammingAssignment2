@@ -1,7 +1,15 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The below functions support creating a special "matrix" object,
+## which can cache its inverse value
 
-## Write a short comment describing this function
+
+# The makeCacheMatrix function creates a special “matrix” object, 
+# which is really a list containing functions to
+# 
+# set the value of the matrix
+# get the value of the matrix
+# set the value of the cached inverse matrix
+# get the value of the cached inverse matrix
+# caculate (if not already) and set the value of the cached inverse matrix
 
 makeCacheMatrix <- function(x = matrix()) {
     
@@ -11,6 +19,8 @@ makeCacheMatrix <- function(x = matrix()) {
     # Define the function to set the matrix
     setMatrix <- function(newValue) {
         x <<- newValue
+        
+        # clear value of cached Inverse
         cachedInverse <<- NULL
     }
     
@@ -36,7 +46,7 @@ makeCacheMatrix <- function(x = matrix()) {
         
         # Check if the inverse is already cached
         if (!is.null(cachedInverse)) {
-            message("Returning cached inverse")
+            message("Returning existing cached inverse")
             return(cachedInverse)
         }
         
@@ -59,19 +69,19 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-
-## Write a short comment describing this function
-
-# cacheSolve <- function(x, ...) {
-#     ## Return a matrix that is the inverse of 'x'
-# }
+# The cachesolve function calculates the Inverse of the special “Matrix” 
+# created with the above makeCacheMatrix function. 
+# However, it first checks to see if the Inverse has already been calculated. 
+# If so, it gets the Inverse from the cache and skips the computation. 
+# Otherwise, it calculates the Inverse of the data and sets the value 
+# of the Inverse in the cache via the setInverse function.
 
 cachesolve <- function(x, ...) {
     
     # Get the cached inverse if it exists
     inverse <- x$getInverse()
     if (!is.null(inverse)) {
-        message("Retrieving cached inverse")
+        message("Retrieving existing cached inverse")
         return(inverse)
     }
     
