@@ -1,6 +1,6 @@
 source("cachematrix.R")
 
-# Create a special matrix object
+# Create special matrix object
 myMatrix <- makeCacheMatrix(matrix(1:4, nrow = 2))
 
 # Get the matrix
@@ -9,7 +9,7 @@ myMatrix$getMatrix()
 # Calculate the inverse
 myMatrix$calculateInverse()
 
-# Get the cached inverse
+# Get cached inverse
 myMatrix$getInverse()
 
 # Set the matrix to a new value
